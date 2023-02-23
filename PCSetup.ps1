@@ -1,4 +1,4 @@
-﻿[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
@@ -11,9 +11,6 @@ Install-module ExchangeOnlineManagement -Scope AllUsers -Confirm:$false
 Install-Module MicrosoftTeams -Scope AllUsers -confirm:$false
 Install-Module AzureAD -Scope AllUsers -confirm:$false
 Install-Module WindowsAutoPilotIntune -Scope AllUsers -confirm:$false
-
-# Install Azure CLI
-$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
 
 #Install Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -36,7 +33,6 @@ choco install spotify -y
 choco install foxitreader -y
 choco install 7zip -y
 choco install forticlientvpn -y
-choco install rdmfree -y
 choco install greenshot -y
 choco install filezilla -y
 choco install wireshark -y
@@ -48,10 +44,12 @@ choco install AzureStorageExplorer -y
 choco install anydesk -y
 choco install nmap -y
 choco install rpi-imager -y
-choco install datagrip -y
 choco install PyCharm-community -y
 choco install Typora -y
 choco install postman -y
+choco install notion -y
+choco install nvidia-broadcast -y
+choco install keepassxc -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'
@@ -65,20 +63,6 @@ $msi = 'pwsh.msi'
 $outputPath = $LocalPath + '\' + $msi
 Invoke-WebRequest -uri $URL -OutFile $outputPath
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 USE_MU=1 ENABLE_MU=1" -Wait
-
-# Install KeePass
-$appName = 'KeePass'
-$drive = 'C:\'
-New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
-$LocalPath = $drive + '\' + $appName 
-set-Location $LocalPath
-$URL = 'https://newcontinuum.dl.sourceforge.net/project/keepass/KeePass%202.x/2.49/KeePass-2.49-Setup.exe'
-$URLexe = 'keepass.exe'
-$outputPath = $LocalPath + '\' + $URLexe
-Invoke-WebRequest -Uri $URL -OutFile $outputPath
-write-host 'Starting Install  KeePass'
-Start-Process -FilePath $outputPath -Args "/install /VERYSILENT " -Wait
-write-host 'Finished Install the of KeePass'
 
 
 # Install AVD Client
@@ -94,9 +78,7 @@ $outputPath = $LocalPath + '\' + $msi
 Invoke-WebRequest -uri $URL -OutFile $outputPath
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
 
-# Install AZ Cli
-$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; remove-item .\AzureCLI.msi
 
 
-
-
+# Install Azure CLI
+$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
