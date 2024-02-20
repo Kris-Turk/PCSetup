@@ -1,8 +1,7 @@
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
-Install-Module PowershellGet -Force -Scope AllUsers -Confirm:$false
 Install-module Az -Scope AllUsers -Confirm:$false
 Install-module MSGraph -Scope AllUsers -Confirm:$false
 Install-module MSOnline -Scope AllUsers -Confirm:$false
@@ -13,43 +12,37 @@ Install-Module AzureAD -Scope AllUsers -confirm:$false
 Install-Module WindowsAutoPilotIntune -Scope AllUsers -confirm:$false
 
 #Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+# Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-choco install git -y
-choco install notepadplusplus -y
-choco install bicep -y
-choco install python -y
-choco install vscode -y 
-choco install googlechrome -y 
-choco install firefox -y
-choco install dotnet -y
-choco install powertoys -y
-choco install mobaxterm -y
-choco install microsoft-windows-terminal -y
-choco install wsl2 -y
-choco install wsl-ubuntu-2004 -y
-choco install displaylink -y
-choco install spotify -y
-choco install foxitreader -y
-choco install 7zip -y
-choco install forticlientvpn -y
-choco install greenshot -y
-choco install filezilla -y
-choco install wireshark -y
-choco install obs-studio -y
-choco install HeidiSQL -y
-choco install msoledbsql -y
-choco install discord -y
-choco install AzureStorageExplorer -y
-choco install anydesk -y
-choco install nmap -y
-choco install rpi-imager -y
-choco install PyCharm-community -y
-choco install Typora -y
-choco install postman -y
-choco install notion -y
-choco install nvidia-broadcast -y
-choco install keepassxc -y
+
+winget install git.git
+winget install Microsoft.VisualStudioCode
+winget install Notepad++.Notepad++
+winget install Microsoft.Teams
+winget install Microsoft.Bicep
+winget install Python.Python.3.11
+winget install Google.Chrome
+winget install Mozilla.Firefox
+winget install Microsoft.PowerToys
+winget install Bitwarden.Bitwarden
+winget install Spotify.Spotify # run from  user context not admin
+wsl.exe --install
+# winget install Canonical.Ubuntu.2204
+winget install Mobatek.mobaxterm
+winget install DisplayLink.GraphicsDriver
+winget install 7zip.7zip
+winget install Foxit.FoxitReader
+winget install Fortinet.FortiClientVPN
+winget install Greenshot.Greenshot
+winget install OBSProject.OBSStudio
+winget install Microsoft.Azure.StorageExplorer
+winget install Microsoft.Azure.FunctionsCoreTools
+winget install Microsoft.AzureCLI
+winget install appmakes.Typora
+winget install Postman.Postman
+winget install Notion.Notion
+winget install Nvidia.Broadcast
+
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'
@@ -81,4 +74,4 @@ Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
 
 
 # Install Azure CLI
-$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
+# $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
