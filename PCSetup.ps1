@@ -16,6 +16,7 @@ Install-Module WindowsAutoPilotIntune -Scope AllUsers -confirm:$false
 
 
 winget install git.git
+winget install github.cli
 winget install Microsoft.VisualStudioCode
 winget install Notepad++.Notepad++
 winget install Microsoft.Teams
